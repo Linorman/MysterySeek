@@ -1,0 +1,6 @@
+[submodule "AutoWerewolf"]
+	path = AutoWerewolf
+	url = https://github.com/Linorman/AutoWerewolf.git
+[submodule "Echoes-of-Deceit-v2"]
+	path = Echoes-of-Deceit-v2
+	url = https://github.com/Linorman/Echoes-of-Deceit-v2.git
