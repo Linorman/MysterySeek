@@ -119,17 +119,6 @@ pip install -r ./Echoes-of-Deceit-v2/requirements.txt
    ollama pull qwen3-embedding:4b
    ```
 
-**For OpenAI API:**
-
-Set your API key as an environment variable:
-```bash
-# Windows PowerShell
-$env:OPENAI_API_KEY = "your-api-key"
-
-# Linux/macOS
-export OPENAI_API_KEY="your-api-key"
-```
-
 #### Game-Specific Configuration
 
 - **AutoWerewolf**: Configuration is done through the Web UI or CLI options
