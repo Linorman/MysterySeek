@@ -79,6 +79,9 @@ git clone https://github.com/Linorman/AutoWerewolf.git
 
 # Clone Echoes-of-Deceit-v2
 git clone https://github.com/Linorman/Echoes-of-Deceit-v2.git
+
+# Or use git submodules
+git submodule update --init --recursive
 ```
 
 #### 3. Create a Virtual Environment (Recommended)
