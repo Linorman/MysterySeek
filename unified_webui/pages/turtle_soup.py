@@ -458,6 +458,17 @@ def render_turtle_game_page(i18n: I18n) -> Optional[str]:
         if turtle_settings.player_agent_mode:
             st.info(f"🤖 {i18n('turtle_player_agent_mode')} - AI will ask questions automatically")
             
+            if "turtle_auto_play_active" not in st.session_state:
+                st.session_state.turtle_auto_play_active = False
+            
+            def _on_auto_play_change():
+                """Sync auto_play_active when checkbox state changes."""
+                st.session_state.turtle_auto_play_active = st.session_state.turtle_auto_play_checkbox
+            
+            def _on_stop_click():
+                """Stop auto play via callback."""
+                st.session_state.turtle_auto_play_active = False
+            
             col1, col2, col3 = st.columns(3)
             
             with col1:
@@ -465,14 +476,22 @@ def render_turtle_game_page(i18n: I18n) -> Optional[str]:
                     _run_agent_turn(runner, i18n)
             
             with col2:
-                auto_play = st.checkbox(i18n("turtle_agent_auto_play"), key="turtle_auto_play_checkbox")
+                auto_play = st.checkbox(
+                    i18n("turtle_agent_auto_play"),
+                    key="turtle_auto_play_checkbox",
+                    value=st.session_state.turtle_auto_play_active,
+                    on_change=_on_auto_play_change,
+                )
             
             with col3:
-                if st.button(f"⏹️ {i18n('turtle_agent_stop')}", key="turtle_agent_stop", use_container_width=True):
-                    st.session_state.turtle_auto_play_checkbox = False
-                    st.rerun()
+                st.button(
+                    f"⏹️ {i18n('turtle_agent_stop')}",
+                    key="turtle_agent_stop",
+                    use_container_width=True,
+                    on_click=_on_stop_click,
+                )
             
-            if auto_play and runner.is_active:
+            if st.session_state.turtle_auto_play_active and runner.is_active:
                 _run_agent_turn(runner, i18n)
         else:
             with st.form(key="turtle_player_input_form", clear_on_submit=True):
